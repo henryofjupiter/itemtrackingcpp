@@ -14,7 +14,7 @@ using namespace std;
 void GroceryItems::menuLoop() {
     string userInput;
 
-    cout << "Enter number here: ";
+    cout << "Enter menu # here: ";
     cin >> userInput;
 
     while(userInput != "4") {
@@ -43,7 +43,7 @@ void GroceryItems::menuLoop() {
             cout << "Input Error, Try Again" << endl;
             menuDisplay();
         }
-        cout << "Enter number here: ";
+        cout << "Enter menu # here: ";
         cin >> userInput;
     }
 }
@@ -59,30 +59,36 @@ void GroceryItems::menuDisplay() const {
 
 // use user input to search file and output with frequency
 //of user input if word is found within file
-void GroceryItems::fileRead(string input) {
+void GroceryItems::fileRead(string item) {
     ifstream  inFS;
     int wordFreq = 0;
     string fileName;
 
-    cout << "Opening file..." << endl;
+    cout << "File opening..." << endl;
     inFS.open("CS210_Project_Three_Input_File.txt");
     if (!inFS.is_open()) {
         cout << "could not open file" << endl;
     }
+
     while(!inFS.eof()) {
         inFS >> fileName;
 
         if (!inFS.fail()) {
             // display user input and frequency
-            if(fileName == input) {
+            if(fileName == item) {
                 ++wordFreq;
             }
-
+            else if (inFS.eof() && wordFreq == 0){
+                cout << "item not in file" << endl;
+            }
         }
     }
-    fileWrite(input, wordFreq);
-    cout << input << " " << wordFreq << endl;
-    mapping(itemsInMap, input, wordFreq);  // calls function that stores searched item
+    if (wordFreq > 0) {
+        fileWrite(item, wordFreq);
+        cout << item << " " << wordFreq << endl;
+        mapping(itemsInMap, item, wordFreq);  // calls function that stores searched item
+    }
+
     inFS.close();
 }
 
