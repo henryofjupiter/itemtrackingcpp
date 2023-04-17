@@ -18,6 +18,8 @@ void GroceryItems::menuLoop() {
     cin >> userInput;
 
     while(userInput != "4") {
+
+        //search items in file
         if (userInput == "1") {
             //enter menu option one
             cout << "Enter item for search: ";
@@ -25,11 +27,16 @@ void GroceryItems::menuLoop() {
             itemInput = userInput;
             fileRead(userInput);
         }
+
+        //prints items in map
         else if (userInput == "2") {
-            //enter menu option two
+            printMap(itemsInMap);
         }
+
+
         else if (userInput == "3") {
-            //enter menu option three
+            printMap(itemsInMap, 3);
+
         }
         else {
             cout << endl;
@@ -73,9 +80,20 @@ void GroceryItems::fileRead(string input) {
 
         }
     }
+    fileWrite(input, wordFreq);
     cout << input << " " << wordFreq << endl;
-    mapping(input, wordFreq);
+    mapping(itemsInMap, input, wordFreq);  // calls function that stores searched item
     inFS.close();
+}
+
+void GroceryItems::fileWrite(string item, size_t wordFreq) {
+    ofstream outFS;
+    outFS.open("frequency.dat");
+    if(!outFS.is_open()) {
+        cout << "Could not open frequency.dat" << endl;
+    }
+    outFS << item << " " << wordFreq;
+    outFS.close();
 }
 
 // converts frequency of user search word found into '*'
@@ -88,8 +106,24 @@ string GroceryItems::converter(string item, int wordFreq) {
         return newString;
 }
 
-void GroceryItems::mapping(string input, int wordFreq) {
-    map<string, int> itemsInMap;
+// adds searched item, and it's frequency to map for temp storage
+void GroceryItems::mapping(map<string, int> &itemsInMap, string item, int wordFreq) {
+    itemsInMap.emplace(item, wordFreq);
+}
 
-    itemsInMap.emplace(input, wordFreq);
+// prints searched item with the amount of time it appears in file
+void GroceryItems::printMap(map<string, int> &itemsInMap) {
+
+    map<string, int>::iterator itr;
+    for(itr = itemsInMap.begin(); itr!= itemsInMap.end(); ++itr) {
+        cout << itr->first << " " << itr->second << endl;
+    }
+}
+
+// prints searched item with a histogram display of time it appears in file
+void GroceryItems::printMap(map<string, int> &itemsInMap, size_t menu = 3) {
+    map<string, int>::iterator itr;
+    for(itr = itemsInMap.begin(); itr!= itemsInMap.end(); ++itr) {
+        cout << itr->first << " " << converter(itr->first, itr->second) << endl;
+    }
 }
