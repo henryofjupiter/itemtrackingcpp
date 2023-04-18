@@ -21,7 +21,7 @@ public:
     static void mapping(map<string, int> &itemsInMap, string item, int wordFreq);
     static void printMap(map<string, int> &itemsInMap);
     static void printMap(map<string, int> &itemsInMap, size_t menu);
-
+    static void formatting();
 private:
     string itemInput;
     map<string, int> itemsInMap;

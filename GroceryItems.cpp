@@ -14,8 +14,10 @@ using namespace std;
 void GroceryItems::menuLoop() {
     string userInput;
 
+    formatting();
     cout << "Enter menu # here: ";
     cin >> userInput;
+    formatting();
 
     while(userInput != "4") {
 
@@ -45,14 +47,18 @@ void GroceryItems::menuLoop() {
             cout << "Input Error, Try Again" << endl;
             menuDisplay();
         }
+        formatting();
         cout << "Enter menu # here: ";
         cin >> userInput;
+        formatting();
     }
 }
 
 // display menu option to user
 void GroceryItems::menuDisplay() {
-    cout << "Menu Options" << endl;
+    formatting();
+    cout << "MENU OPTIONS" << endl;
+    formatting();
     cout << "1. Item Look Up" << endl;
     cout << "2. Print List of Items Purchased" << endl;
     cout << "3. Print Item Frequency" << endl;
@@ -87,7 +93,7 @@ void GroceryItems::fileRead(string item) {
     }
     if (wordFreq > 0) {
         fileWrite(item, wordFreq);
-        cout << item << " " << wordFreq << endl;
+        cout << "-->" << " " <<  item << " " << wordFreq << endl;
         mapping(itemsInMap, item, wordFreq);  // calls function that stores searched item
     }
 
@@ -136,4 +142,7 @@ void GroceryItems::printMap(map<string, int> &itemsInMap, size_t menu = 3) {
     for(itr = itemsInMap.begin(); itr!= itemsInMap.end(); ++itr) {
         cout << itr->first << " " << converter(itr->first, itr->second) << endl;
     }
+}
+void GroceryItems::formatting() {
+    cout << "-------------------" << endl;
 }
