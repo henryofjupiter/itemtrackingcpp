@@ -33,11 +33,13 @@ void GroceryItems::menuLoop() {
             printMap(itemsInMap);
         }
 
-
+        //prints items in map (histogram)
         else if (userInput == "3") {
             printMap(itemsInMap, 3);
 
         }
+
+        //for input not in menu
         else {
             cout << endl;
             cout << "Input Error, Try Again" << endl;
@@ -49,7 +51,7 @@ void GroceryItems::menuLoop() {
 }
 
 // display menu option to user
-void GroceryItems::menuDisplay() const {
+void GroceryItems::menuDisplay() {
     cout << "Menu Options" << endl;
     cout << "1. Item Look Up" << endl;
     cout << "2. Print List of Items Purchased" << endl;
@@ -58,7 +60,7 @@ void GroceryItems::menuDisplay() const {
 }
 
 // use user input to search file and output with frequency
-//of user input if word is found within file
+// of user input if word is found within file
 void GroceryItems::fileRead(string item) {
     ifstream  inFS;
     int wordFreq = 0;
@@ -92,6 +94,8 @@ void GroceryItems::fileRead(string item) {
     inFS.close();
 }
 
+// user input and frequency of word found is then stored within
+// a data file
 void GroceryItems::fileWrite(string item, size_t wordFreq) {
     ofstream outFS;
     outFS.open("frequency.dat");

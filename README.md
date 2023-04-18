@@ -1,7 +1,8 @@
-# itemtrackingcpp
+<div align="center"><strong>itemtrackingcpp</strong></div> 
 
 ## About The Project
 _______
+<br>
  - Build using C++
 
 This projects reads a text file, using the input from user to perform keyword search of items in the list and return the item found along with its occurrences.
