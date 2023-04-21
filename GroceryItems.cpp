@@ -33,6 +33,9 @@ void GroceryItems::menuLoop() {
         //prints items in map
         else if (userInput == "2") {
             printMap(itemsInMap);
+            if (itemInput.empty()) {
+                cout << "Nothing to print. Try again" << endl;
+            }
         }
 
         //prints items in map (histogram)
