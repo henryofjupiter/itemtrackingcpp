@@ -14,7 +14,7 @@ using namespace std;
 class GroceryItems {
 public:
     void menuLoop();
-    static void menuDisplay () ;
+    static void menuDisplay();
     static string converter (string item, int wordFreq);
     void fileRead(string item);
     static void fileWrite(string item, size_t wordFreq);
